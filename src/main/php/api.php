@@ -2,7 +2,7 @@
 function callApi($method, $url, $data = false) {
     $curl = curl_init();
     
-    $base_url = "http://localhost/"; 
+    $base_url = "http://nginx/api"; 
 
     curl_setopt($curl, CURLOPT_URL, $base_url . $url);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
