@@ -1,4 +1,5 @@
-version: '3.8'
+volumes:
+  mysql_data:
 services:
   mysql:
     image: mysql:8.0
@@ -8,6 +9,9 @@ services:
       MYSQL_DATABASE: taxi_api
     ports:
       - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./src/main/resources/schema.sql:/docker-entrypoint-initdb.d/schema.sql
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 20s
