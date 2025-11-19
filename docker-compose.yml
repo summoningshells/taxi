@@ -1,14 +1,21 @@
 volumes:
   mysql_data:
 services:
+  nginx:
+    build: ./nginx
+    container_name: nginx_reverse_proxy
+    ports:
+      - "80:80"
+    depends_on:
+      - taxi-api
+      - client-web
+      - admin-console
   mysql:
     image: mysql:8.0
     container_name: mysql_taxi_api
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: taxi_api
-    ports:
-      - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./src/main/resources/schema.sql:/docker-entrypoint-initdb.d/schema.sql
@@ -19,8 +26,6 @@ services:
   taxi-api:
     build: .
     container_name: taxi_api_app
-    ports:
-      - "8080:8080"
     depends_on:
       mysql:
         condition: service_healthy
@@ -32,8 +37,6 @@ services:
   client-web:
     image: php:8.2-apache
     container_name: taxi_web_client
-    ports:
-      - "80:80"
     volumes:
       - ./src/main/php:/var/www/html
     depends_on:
@@ -41,8 +44,6 @@ services:
   admin-console:
     build: ./admin-console
     container_name: taxi_api_admin
-    ports:
-      - "8081:80"
     depends_on:
       mysql:
         condition: service_healthy

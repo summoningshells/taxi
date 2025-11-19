@@ -16,6 +16,11 @@ cd taxi-api
 docker-compose up --build
 ```
 
+L'application sera accessible via Nginx sur le port 80:
+- API: `http://localhost/api/`
+- Console d'administration: `http://localhost/admin/`
+- Application web client: `http://localhost/`
+
 ### Sans Docker
 
 Assurez-vous d'avoir Java et Maven installés. Pour lancer l'application, utilisez la commande suivante:
@@ -41,25 +46,25 @@ chmod +x test-api.sh
 *   **POST /chauffeurs** - Créer un nouveau chauffeur
 
     ```bash
-    curl -X POST -H "Content-Type: application/json" -d '{"nom": "Jeanmiche", "vehicule": "clio3", "immatriculation": "beaugossedu34", "statut": "disponible"}' http://localhost:8080/chauffeurs
+    curl -X POST -H "Content-Type: application/json" -d '{"nom": "Jeanmiche", "vehicule": "clio3", "immatriculation": "beaugossedu34", "statut": "disponible"}' http://localhost/api/chauffeurs
     ```
 
 *   **GET /chauffeurs** - Obtenir tous les chauffeurs
 
     ```bash
-    curl http://localhost:8080/chauffeurs
+    curl http://localhost/api/chauffeurs
     ```
 
 *   **GET /chauffeurs/{id}** - Obtenir un chauffeur par son ID
 
     ```bash
-    curl http://localhost:8080/chauffeurs/1
+    curl http://localhost/api/chauffeurs/1
     ```
 
 *   **PUT /chauffeurs/{id}** - Mettre à jour un chauffeur
 
     ```bash
-    curl -X PUT -H "Content-Type: application/json" -d '{"nom": "Jeanmiche", "vehicule": "clio3", "immatriculation": "AB-123-CD", "statut": "indisponible"}' http://localhost:8080/chauffeurs/1
+    curl -X PUT -H "Content-Type: application/json" -d '{"nom": "Jeanmiche", "vehicule": "clio3", "immatriculation": "AB-123-CD", "statut": "indisponible"}' http://localhost/api/chauffeurs/1
     ```
 
 ### Clients
@@ -67,13 +72,13 @@ chmod +x test-api.sh
 *   **POST /clients** - Créer un nouveau client
 
     ```bash
-    curl -X POST -H "Content-Type: application/json" -d '{"nom": "marine", "email": "marine@lecnam.local", "tel": "+0101010"}' http://localhost:8080/clients
+    curl -X POST -H "Content-Type: application/json" -d '{"nom": "marine", "email": "marine@lecnam.local", "tel": "+0101010"}' http://localhost/api/clients
     ```
 
 *   **GET /clients/{id}** - Obtenir un client par son ID
 
     ```bash
-    curl http://localhost:8080/clients/1
+    curl http://localhost/api/clients/1
     ```
 
 ### Courses
@@ -81,19 +86,19 @@ chmod +x test-api.sh
 *   **POST /courses** - Créer une nouvelle demande de course
 
     ```bash
-    curl -X POST -H "Content-Type: application/json" -d '{"client": {"id": 1}, "pointDepart": "1 rue de la Paix", "pointArrivee": "10 rue de la Guerre"}' http://localhost:8080/courses
+    curl -X POST -H "Content-Type: application/json" -d '{"client": {"id": 1}, "pointDepart": "1 rue de la Paix", "pointArrivee": "10 rue de la Guerre"}' http://localhost/api/courses
     ```
 
 *   **GET /courses** - Obtenir toutes les courses
 
     ```bash
-    curl http://localhost:8080/courses
+    curl http://localhost/api/courses
     ```
 
 *   **GET /courses/{id}** - Obtenir une course par son ID
 
     ```bash
-    curl http://localhost:8080/courses/1
+    curl http://localhost/api/courses/1
     ```
 
 *   **PUT /courses/{id}** - Mettre à jour le statut d'une course
@@ -101,17 +106,17 @@ chmod +x test-api.sh
     *Démarrer une course:*
 
     ```bash
-    curl -X PUT -H "Content-Type: application/json" -d '{"status": "en_cours"}' http://localhost:8080/courses/1
+    curl -X PUT -H "Content-Type: application/json" -d '{"status": "en_cours"}' http://localhost/api/courses/1
     ```
 
     *Terminer une course:*
 
     ```bash
-    curl -X PUT -H "Content-Type: application/json" -d '{"status": "terminee"}' http://localhost:8080/courses/1
+    curl -X PUT -H "Content-Type: application/json" -d '{"status": "terminee"}' http://localhost/api/courses/1
     ```
 
 *   **DELETE /courses/{id}** - Annuler une course
 
     ```bash
-    curl -X DELETE http://localhost:8080/courses/1
+    curl -X DELETE http://localhost/api/courses/1
     ```

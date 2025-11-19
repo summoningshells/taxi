@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($client && isset($client['id'])) {
         // BINGO : On sauvegarde l'utilisateur en session PHP
         $_SESSION['user'] = $client;
-        header("Location: app-web.php");
+        header("Location: index.php");
         exit();
     } else {
         $error = "Client introuvable. Vérifiez l'ID.";

@@ -2,8 +2,7 @@
 function callApi($method, $url, $data = false) {
     $curl = curl_init();
     
-    // DANS DOCKER : On utilise le nom du conteneur Java défini dans le docker-compose
-    $base_url = "http://taxi-api:8080"; 
+    $base_url = "http://nginx/api"; 
 
     curl_setopt($curl, CURLOPT_URL, $base_url . $url);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
