@@ -12,7 +12,7 @@ Pour lancer l'application avec Docker, utilisez la commande suivante:
 
 ```bash
 git clone
-cd taxi-api
+cd taxi
 docker-compose up --build -d
 ```
 
